@@ -12,7 +12,10 @@ class Firehose.Consumer
     # transport, like WebSockets is supported by the browser, but for whatever
     # reason it can't connect (probably a firewall)
     @config.failed       ||= ->
-      throw "Could not connect"
+      if console?
+        console.log "Could not connect"
+      else
+        throw "Could not connect"
     # Params that we'll tack on to the URL.
     @config.params       ||= {}
     # Do stuff before we send the message into config.message. The sensible
